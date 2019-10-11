@@ -21,4 +21,14 @@ void main(){
     expect(allSame(testBoard[1],' '), true);
     expect(allSame(testBoard[2],' '), true);
   });
+
+  //test case for testing winning
+  test('Testing Winning', (){
+    List<List<String>> testBoard = createBoard();
+    testBoard=[['X','O','O'],[' ','X',' '],[' ',' ','X']];
+    String currentPlayer='X';
+    expect(checkForWin(testBoard,currentPlayer),true);
+
+  });
+//bool checkForWin(List<List<String>>board,String currentPlayer)
 }
