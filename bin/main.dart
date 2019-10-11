@@ -6,6 +6,7 @@
 // 2. Extend the logic to Columns and diagonal
 
 import 'dart:io';
+import 'dart:math';
 
 void main() {
   List<List<String>> board = createBoard();
@@ -22,7 +23,13 @@ void main() {
       continue;
     }
     board[row][column] = currentPlayer;
+
     printBoard(board);
+
+     if(checkForWin(board,currentPlayer)) {
+       print(" $currentPlayer wins");
+       return;
+     }
     if (currentPlayer == 'X') {
       currentPlayer = 'O';
     } else {
@@ -31,8 +38,43 @@ void main() {
   }
 }
 
+bool checkForWin(List<List<String>>board,String currentPlayer) {
+
+  for(int i=0;i<=2;i++)
+    {
+      if(board[i][0] == currentPlayer && board[i][1]== currentPlayer && board[i][2]== currentPlayer)
+      {
+        print("Row Win");
+        return true;
+      }
+    }
+    for(int i=0;i<=2;i++)
+  {
+  if(board[0][i]== currentPlayer && board[1][i]== currentPlayer && board[2][i]== currentPlayer)
+  {
+  print("column Win");
+  return true;
+  }
+  }
+  if(board[0][0]== currentPlayer && board[1][1]==currentPlayer && board[2][2]== currentPlayer)
+  {
+  print("Diagonal Win");
+  return true;
+  }
+  if(board[2][0]== currentPlayer && board[1][1]==currentPlayer && board[0][2]== currentPlayer)
+  {
+  print("Diagonal Win");
+  return true;
+  }
+  return false;
+}
+
+
+
+
 // Challenge 2
 // Write a test case to see if the board is empty and of size 3 by 3
+
 List<List<String>> createBoard() {
   var boardSize = 3;
   return List.generate(boardSize, (_) => List.filled(boardSize, ' '));
